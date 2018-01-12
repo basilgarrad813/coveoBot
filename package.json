@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/basilgarrad813/coveoBot/issues"
   },
-  "homepage": "https://github.com/basilgarrad813/coveoBot#readme"
+  "homepage": "https://github.com/basilgarrad813/coveoBot#readme",
+  "dependencies": {
+    "express": "^4.16.2"
+  }
 }
