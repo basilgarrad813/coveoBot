@@ -1,0 +1,19 @@
+{
+  "name": "coveobot",
+  "version": "1.0.0",
+  "description": "Coveo Slack Bot",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/basilgarrad813/coveoBot.git"
+  },
+  "author": "Ryan Davidson",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/basilgarrad813/coveoBot/issues"
+  },
+  "homepage": "https://github.com/basilgarrad813/coveoBot#readme"
+}
