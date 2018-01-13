@@ -17,7 +17,11 @@
   },
   "homepage": "https://github.com/basilgarrad813/coveoBot#readme",
   "dependencies": {
+    "body-parser": "^1.18.2",
+    "cheerio": "^1.0.0-rc.2",
     "express": "^4.16.2",
-    "mssql": "^4.1.0"
+    "mssql": "^4.1.0",
+    "node-loggly-bulk": "^2.2.1",
+    "request": "^2.83.0"
   }
 }
