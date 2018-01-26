@@ -58,6 +58,7 @@ router
         }
         else{
           res.sendStatus(404);
+          logger.log(err);
         }
     });
 
