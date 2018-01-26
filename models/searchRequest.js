@@ -1,62 +1,54 @@
 var request = require("request");
-var cheerio = require("cheerio");
 var util = require("util");
+var querystring = require("querystring");
+var http = require("http");
 var logger = require("./../app/logglyLogger"); //add loggly logger
-var resultArray = [];
+var request = require("request");
+var jsonQuery = require("json-query");
+var resultArray = {};
 
-exports.sendSearchRequest = function(requestString, requestUrl){
 
-    logger.log("URL: " + requestUrl);
-    logger.log("Search: " + requestString);
-    var searchUrl = util.format(requestUrl, requestString);
+var coveo_api_key = process.env.COVEO_API_KEY || '9cb3d8f0-1ed4-4747-8908-41db5183834d';
 
-    //logger.log("Search url: " + searchUrl);    
+exports.sendAPICall = function(searchTerm, callback){
+
+
+  var options = {
+    uri: 'https://platform.cloud.coveo.com/rest/search/v2?organizationId=landeskprod',
+    method: 'POST',
+    json: {
+      "q" : "@jiveparentplaces=\"Endpoint Manager and Endpoint Security\" @sysdocumenttype=\"document\"" + searchTerm,
+      "numberOfResults" : 5
+    }
+  };
+
+  request(options, function (err, res, body){
+      if (!err && res.statusCode == 200) { 
+        //logger.log("Response body: " + body);
+      resultArray = { 
+          "text" : "Here are the top 5 results for " + searchTerm,
+          "attachments": []
+      };
+      for(var i = 0; i < body.results.length; i++){       
+
+        var searchResult = body.results[i];
+        var result = {};
+        result.fallback = searchResult.title;
+        result.title = searchResult.title;
+        result.title_link = searchResult.uri;
+        result.text = searchResult.excerpt;
+
+        resultArray.attachments.push(result);
+             
+          //logger.log("Result #" + (i + 1) + ": " + resultArray[i]);     
+      }
+      //logger.log(resultArray[0]);
+        //logger.log(JSON.stringify(body));
+        //return body;
+      }      
+    //return err.statusCode
+    callback(err, resultArray);
+    }
     
-    logger.log("Requesting search results");
-    logger.log("Search url: " + searchUrl);
-
-request(searchUrl, function (err, res, html) {
-
-    logger.log("Entered request");
-
-    if (!err && res.statusCode == 200) {
-        
-        logger.log("Success");
-        logger.log(html);
-    var $ = cheerio.load(html);
-    var i = 0;
-    $('.CoveoResultLink[class=CoveoResultList]').each(function(index, element){
-        if(i < 10){
-        var url = element.attr('href');
-        var title = element.html;
-        
-        logger.log(url.toString() + title.toString());
-        var resultJSON = {
-            URL: url,
-            Title: title
-        }
-        logger.log(resultJSON);
-        array.push(resultJSON);
-        i++;
-    }
-    else logger.log("Failed request: " + err);
-    })
-
-    if(err) return err;
-   
-  }
-  else {
-      logger.log("Err: " + res.statusCode);
-  }
-});
-
-if(resultArray.length > 0){
-    return resultArray
-}
-else {
-    var fail  = { 
-        message: "Failed"
-    }
-    return fail;
-}
-}
+  ).auth( null, null, true, coveo_api_key);
+};

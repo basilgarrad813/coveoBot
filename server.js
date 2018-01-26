@@ -18,7 +18,7 @@ var router = express.Router();
 
 router.use(function(req, res, next) {
 
-  logger.log("A request was recieved");
+  //logger.log("A request was recieved");
 
   next();
 });
@@ -45,14 +45,21 @@ router
 
     var result;
 
-    var requestUrl = "https://landeskcommunity.force.com/customers/CommunitySearch#q=%s&t=All&f:@commonproductgroupname=[LANDESK]&f:@commonproductname=[Management and Security]&f:@commonversion=[9.6,2016,2017]&f:@commonlanguage=[English]" 
+    //var requestUrl = "https://landeskcommunity.force.com/customers/CommunitySearch#q=%s&t=All&f:@commonproductgroupname=[LANDESK]&f:@commonproductname=[Management and Security]&f:@commonversion=[9.6,2016,2017]&f:@commonlanguage=[English]" 
     var requestString = req.body.text.replace(/<.*>/, "");
 
-    logger.log("The following string was searched: " + requestString);
+    //logger.log("The following string was searched: " + requestString);
 
-    result = search.sendSearchRequest(requestString, requestUrl);
-
-    res.send(result);
+      search.sendAPICall(requestString, function(err, result){
+      logger.log("API Result" + result);
+        if(!err && result != null){
+          //res.contentType = 'application/json';          
+          res.status(200).json(result);
+        }
+        else{
+          res.sendStatus(404);
+        }
+    });
 
   });
 
@@ -60,4 +67,4 @@ router
 app.use("/api/v1", router);
 
 app.listen(port);
-logger.log("Listening on port " + port);
+//logger.log("Listening on port " + port);
