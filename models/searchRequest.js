@@ -26,6 +26,7 @@ exports.sendAPICall = function(searchTerm, callback){
       if (!err && res.statusCode == 200) { 
         //logger.log("Response body: " + body);
       resultArray = { 
+          "response_type" : "in_channel",
           "text" : "Here are the top 5 results for " + searchTerm,
           "attachments": []
       };
