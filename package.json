@@ -21,6 +21,7 @@
     "cheerio": "^1.0.0-rc.2",
     "express": "^4.16.2",
     "json-query": "^2.2.2",
+    "mocha": "^5.0.0",
     "mssql": "^4.1.0",
     "node-loggly-bulk": "^2.2.1",
     "request": "^2.83.0"
