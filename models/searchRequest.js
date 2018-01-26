@@ -36,7 +36,7 @@ exports.sendAPICall = function(searchTerm, callback){
         var result = {};
         result.fallback = searchResult.title;
         result.title = searchResult.title;
-        result.title_link = searchResult.uri;
+        result.title_link = searchResult.clickUri;
         result.text = searchResult.excerpt;
 
         resultArray.attachments.push(result);
