@@ -10,14 +10,15 @@ chai.use(chaiHttp);
 
 describe("/GET ping", () => {
   it("it should GET a ping response", function(done){
-    chai
+    check(done, function(){
+      chai
       .request(api)
       .get("/")
       .end((err, res) => {
         res.should.have.status(200);
         res.body.message.should.equal("all is well");
-        done();
       });
+    });    
   });
 });
 
@@ -33,7 +34,6 @@ describe("/POST test search", () => {
             .end((err, res) => {
               res.should.have.status(200);
               res.body.message.should.equal(!null);
-              done();
           });
       }, 3000);    
       });
