@@ -58,6 +58,6 @@ typings/
 .env
 
 #readme files
-.md
+*.md
 
 
