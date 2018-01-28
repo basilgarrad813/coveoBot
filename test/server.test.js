@@ -17,7 +17,6 @@ describe("/GET ping", () => {
       .end((err, res) => {
         res.should.have.status(200);
         res.body.message.should.equal("all is well");
-        done();
       });
     });    
   });
@@ -35,7 +34,6 @@ describe("/POST test search", () => {
             .end((err, res) => {
               res.should.have.status(200);
               res.body.message.should.equal(!null);
-              done();
           });
       }, 3000);    
       });
