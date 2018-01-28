@@ -7,12 +7,10 @@ var request = require("request");
 var jsonQuery = require("json-query");
 var resultArray = {};
 
+var coveo_api_key = process.env.coveo_api_key;
 
-var coveo_api_key = process.env.COVEO_API_KEY || '9cb3d8f0-1ed4-4747-8908-41db5183834d';
-
-exports.sendAPICall = function(searchTerm, callback){
-
-
+exports.searchEPM = function(searchTerm, callback){
+//logger.log("API KEY " + coveo_api_key);
   var options = {
     uri: 'https://platform.cloud.coveo.com/rest/search/v2?organizationId=landeskprod',
     method: 'POST',

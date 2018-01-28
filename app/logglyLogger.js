@@ -1,18 +1,33 @@
 var loggly = require("node-loggly-bulk")
+var logglyUsername = process.env.loggly_user;
+var logglyPassword = process.env.loggly_password;
+var logglyToken = process.env.loggly_token;
 
 
-const logger = loggly.createClient({
-    token: "138c1627-8149-44a0-8c02-ac00536e1cba",
+var logger = loggly.createClient({
+    token: logglyToken,
     subdomain: "rdavidson",
     auth: {
-        username: "basilgarrad813",
-        password: "Robinton813"
+        username: logglyUsername,
+        password: logglyPassword
     }
   });
 
 exports.log = function(logData){
-        logData = new Date().toUTCString() + " " + logData;
-        logger.log(logData);
+
+    logData = new Date().toUTCString() + " " + logData;
+    
+        if(process.env.NODE_ENV == "development" || process.env.NODE_ENV == "debug"){    
+        console.log(logData);
+        }
+        else{
+            if(logglyToken != null && logglyPassword != null && logglyUsername != null){    
+                logger.log(logData);
+            }
+            else{
+                console.log(logData);
+            }
+        }
 };
 
 
