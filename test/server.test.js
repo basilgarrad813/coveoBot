@@ -10,7 +10,8 @@ chai.use(chaiHttp);
 
 describe("/GET ping", () => {
   it("it should GET a ping response", function(done){
-    chai
+    check(done, function(){
+      chai
       .request(api)
       .get("/")
       .end((err, res) => {
@@ -18,6 +19,7 @@ describe("/GET ping", () => {
         res.body.message.should.equal("all is well");
         done();
       });
+    });    
   });
 });
 
