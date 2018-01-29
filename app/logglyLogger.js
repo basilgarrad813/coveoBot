@@ -17,7 +17,7 @@ exports.log = function(logData){
 
     logData = new Date().toUTCString() + " " + logData;
     
-        if(process.env.NODE_ENV == "development" || process.env.NODE_ENV == "debug"){    
+        if(process.env.NODE_ENV == "debug"){    
         console.log(logData);
         }
         else{
