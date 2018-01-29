@@ -22,29 +22,11 @@ describe("/GET ping", () => {
   });
 });
 
-describe("/POST test search", () => {
-  it('it should POST a search "mocha" and return "mocha"', function(done){
-      setTimeout(function(){
-          check(done, function(){
-            chai
-            .request(api)
-            .post("/search/epm")
-            .set("content-type", "application/x-www-form-urlencoded")
-            .send({ text: "mocha" })
-            .end((err, res) => {
-              res.should.have.status(200);
-              res.body.message.should.equal(!null);
-          });
-      }, 3000);    
-      });
-  });
-});
-
 function check( done, f ) {
-    try {
-      f();
-      done();
-    } catch( e ) {
-      done( e );
-    }
+  try {
+    f();
+    done();
+  } catch( e ) {
+    done( e );
   }
+}

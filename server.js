@@ -10,6 +10,11 @@ var search = require("./models/searchRequest");
 var port = process.env.PORT;
 var router = express.Router();
 
+var failedResponse = {
+  "response_type" : "in_channel",
+  "text" : "Something went wrong"
+};
+
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
@@ -41,12 +46,50 @@ router
           res.status(200).json(result);
         }
         else{
-          res.sendStatus(404);
-          logger.log(err);
+          res.status(200).json(failedResponse);
+          logger.log("Error: " + err);
         }
     });
   });
 
+//service desk search route
+router 
+  .route("/search/sd")
+
+  .post(function(req,res){
+    var requestString = req.body.text.replace(/<.*>/, ""); //remove tags from request
+    search.searchSD(requestString, function(err, result){
+    //logger.log("API Result" + result);
+      if(!err && result != null){       
+        res.status(200).json(result);
+      }
+      else{
+        res.status(200).json(failedResponse);
+        logger.log("Error: " + err);
+
+      }
+  });
+});
+
+//global search route
+router
+  .route("search/all")
+
+  .post(function(req, res){
+    var requestString = req.body.text.replace(/<.*>/, ""); //remove tags from request
+    search.searchAll(requestString, function(err, result){
+    //logger.log("API Result" + result);
+      if(!err && result != null){       
+        res.status(200).json(result);
+      }
+      else{
+        res.status(200).json(failedResponse);
+        logger.log("Error: " + err);
+
+      }
+  });
+
+});
 
 //set route to use /api/v1 prefix
 app.use("/api/v1", router);
