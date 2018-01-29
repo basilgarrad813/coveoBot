@@ -47,6 +47,42 @@ router
     });
   });
 
+//service desk search route
+router 
+  .route("/search/sd")
+
+  .post(function(req,res){
+    var requestString = req.body.text.replace(/<.*>/, ""); //remove tags from request
+    search.searchSD(requestString, function(err, result){
+    //logger.log("API Result" + result);
+      if(!err && result != null){       
+        res.status(200).json(result);
+      }
+      else{
+        res.sendStatus(404);
+        logger.log(err);
+      }
+  });
+});
+
+//global search route
+router
+  .route("search/all")
+
+  .post(function(req, res){
+    var requestString = req.body.text.replace(/<.*>/, ""); //remove tags from request
+    search.searchAll(requestString, function(err, result){
+    //logger.log("API Result" + result);
+      if(!err && result != null){       
+        res.status(200).json(result);
+      }
+      else{
+        res.sendStatus(404);
+        logger.log(err);
+      }
+  });
+
+});
 
 //set route to use /api/v1 prefix
 app.use("/api/v1", router);
