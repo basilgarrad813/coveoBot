@@ -10,13 +10,18 @@ var search = require("./models/searchRequest");
 var port = process.env.PORT;
 var router = express.Router();
 
+var failedResponse = {
+  "response_type" : "in_channel",
+  "text" : "Something went wrong"
+};
+
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
 //middleware for all requests
 router.use(function(req, res, next) { 
   if(process.env.NODE_ENV == "debug")
-  logger.log("A request was recieved");
+  //logger.log("A request was recieved");
   next();
 });
 
@@ -41,8 +46,8 @@ router
           res.status(200).json(result);
         }
         else{
-          res.sendStatus(404);
-          logger.log(err);
+          res.status(200).json(failedResponse);
+          ogger.log("Error: " + err);
         }
     });
   });
@@ -59,8 +64,8 @@ router
         res.status(200).json(result);
       }
       else{
-        res.sendStatus(404);
-        logger.log(err);
+        res.status(200).json(failedResponse);
+        ogger.log("Error: " + err);
       }
   });
 });
@@ -77,8 +82,8 @@ router
         res.status(200).json(result);
       }
       else{
-        res.sendStatus(404);
-        logger.log(err);
+        res.status(200).json(failedResponse);
+        logger.log("Error: " + err);
       }
   });
 

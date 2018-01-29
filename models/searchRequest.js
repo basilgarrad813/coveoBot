@@ -5,11 +5,12 @@ var http = require("http");
 var logger = require("./../app/logglyLogger"); //add loggly logger
 var request = require("request");
 var jsonQuery = require("json-query");
-var resultArray = {};
+
 
 var coveo_api_key = process.env.coveo_api_key;
 
 exports.searchEPM = function(searchTerm, callback){
+  var resultArray = {};
 //logger.log("API KEY " + coveo_api_key);
   var options = {
     uri: 'https://platform.cloud.coveo.com/rest/search/v2?organizationId=landeskprod',
@@ -53,6 +54,7 @@ exports.searchEPM = function(searchTerm, callback){
 };
 
 exports.searchSD = function(searchTerm, callback){
+  var resultArray = {};
 
   var options = {
     uri: 'https://platform.cloud.coveo.com/rest/search/v2?organizationId=landeskprod',
@@ -96,6 +98,7 @@ exports.searchSD = function(searchTerm, callback){
 };
 
 exports.searchAll = function(searchTerm, callback){
+  var resultArray = {};
 
   var options = {
     uri: 'https://platform.cloud.coveo.com/rest/search/v2?organizationId=landeskprod',

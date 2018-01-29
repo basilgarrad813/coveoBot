@@ -18,7 +18,7 @@ describe("EPM search test", () => {
             .set("content-type", "application/x-www-form-urlencoded")
             .send({ text: "Data Analytics" })
             .end((err, res) => {
-              res.should.have.status(200);
+                res.should.have.status(200);
               res.body.message.should.equal(!null);
           });
       }, 3000);    
@@ -36,8 +36,10 @@ describe("Global search test", () => {
             .set("content-type", "application/x-www-form-urlencoded")
             .send({ text: "Data Analytics" })
             .end((err, res) => {
-              res.should.have.status(200);
+            //console.log(res.body);
+            res.should.have.status(200);
               res.body.message.should.equal(!null);
+              
           });
       }, 3000);    
       });
@@ -45,7 +47,7 @@ describe("Global search test", () => {
 });
 
 describe("Service Desk search test", () => {
-  it('it should POST a search "Workspaces" and return a valid response', function(done){
+  it('it should POST a search "workspaces" and return a valid response', function(done){
       setTimeout(function(){
           check(done, function(){
             chai
@@ -54,6 +56,7 @@ describe("Service Desk search test", () => {
             .set("content-type", "application/x-www-form-urlencoded")
             .send({ text: "workspaces" })
             .end((err, res) => {
+            //console.log(res.body);
               res.should.have.status(200);
               res.body.message.should.equal(!null);
           });
@@ -67,6 +70,7 @@ function check( done, f ) {
       f();
       done();
     } catch( e ) {
+    console.log(e);
       done( e );
     }
   }
