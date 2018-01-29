@@ -28,7 +28,7 @@ router.use(function(req, res, next) {
 // test route to make sure everything is working
 router.get("/", function(req, res) {
   logger.log("Checking server");
-  res.json({ message: "all is well" });
+  res.status(200).json({ message: "all is well" });
 });
 
 //epm search route
@@ -73,7 +73,7 @@ router
 
 //global search route
 router
-  .route("search/all")
+  .route("/search/all")
 
   .post(function(req, res){
     var requestString = req.body.text.replace(/<.*>/, ""); //remove tags from request
