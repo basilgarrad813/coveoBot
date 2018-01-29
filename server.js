@@ -47,7 +47,7 @@ router
         }
         else{
           res.status(200).json(failedResponse);
-          ogger.log("Error: " + err);
+          logger.log("Error: " + err);
         }
     });
   });
