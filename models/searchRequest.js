@@ -71,7 +71,7 @@ exports.searchSD = function(searchTerm, callback){
       //logger.log("Response body: " + body);
     resultArray = { 
         "response_type" : "in_channel",
-        "text" : "Here are the top 10 results for: " + searchTerm,
+        "text" : "Here are the top 5 results for: " + searchTerm,
         "attachments": []
     };
     for(var i = 0; i < body.results.length; i++){       
