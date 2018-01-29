@@ -19,6 +19,7 @@ describe("EPM search test", () => {
             .send({ text: "Data Analytics" })
             .end((err, res) => {
                 res.should.have.status(200);
+
               res.body.message.should.equal(!null);
           });
       }, 3000);    
@@ -71,6 +72,7 @@ function check( done, f ) {
       done();
     } catch( e ) {
     console.log(e);
+
       done( e );
     }
   }

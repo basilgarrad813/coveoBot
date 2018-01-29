@@ -65,7 +65,8 @@ router
       }
       else{
         res.status(200).json(failedResponse);
-        ogger.log("Error: " + err);
+        logger.log("Error: " + err);
+
       }
   });
 });
@@ -84,6 +85,7 @@ router
       else{
         res.status(200).json(failedResponse);
         logger.log("Error: " + err);
+
       }
   });
 

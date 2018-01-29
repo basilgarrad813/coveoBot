@@ -54,7 +54,9 @@ exports.searchEPM = function(searchTerm, callback){
 };
 
 exports.searchSD = function(searchTerm, callback){
+
   var resultArray = {};
+
 
   var options = {
     uri: 'https://platform.cloud.coveo.com/rest/search/v2?organizationId=landeskprod',
