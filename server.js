@@ -21,7 +21,7 @@ app.use(bodyParser.json());
 //middleware for all requests
 router.use(function(req, res, next) { 
   if(process.env.NODE_ENV == "debug")
-  //logger.log("A request was recieved");
+  logger.log("A request was recieved");
   next();
 });
 

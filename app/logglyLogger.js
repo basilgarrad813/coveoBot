@@ -17,6 +17,7 @@ exports.log = function(logData){
 
     logData = new Date().toUTCString() + " " + logData;
     
+    try{
         if(process.env.NODE_ENV == "debug"){    
         console.log(logData);
         }
@@ -28,6 +29,10 @@ exports.log = function(logData){
                 console.log(logData);
             }
         }
+    }
+    catch(err){
+        console.log(err);
+    }
 };
 
 
