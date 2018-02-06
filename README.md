@@ -2,14 +2,3 @@
 
 # coveoBot
 Searches Coveo based on slack slash command
-
-
-```javascript
-Some javascript alert();
-<pre> dont highlight me alert(); </pre>
-```python
-Some python
-def yadda
-```
-```
-
