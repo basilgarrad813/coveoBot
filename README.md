@@ -3,12 +3,13 @@
 # coveoBot
 Searches Coveo based on slack slash command
 
-<pre> some text
+
 ```javascript
 Some javascript alert();
+<pre> dont highlight me alert(); </pre>
 ```python
 Some python
 def yadda
 ```
 ```
-</pre>
+
